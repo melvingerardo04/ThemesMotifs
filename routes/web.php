@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/loginBridesGroom','Auth\LoginController@loginBridesGroom')->name('loginBridesGroom');
+Route::get('/loginSupplier','Auth\LoginController@loginSupplier')->name('loginSupplier');
+
+Route::get('/registerBridesGroom','Auth\RegisterController@register')->name('registerBridesGroom');
+Route::get('/registerSupplier','Auth\RegisterController@register')->name('registerSupplier');

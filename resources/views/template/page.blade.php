@@ -17,10 +17,11 @@
             <i class="fa fa-instagram"></i>
             <i class="pull-right">Not Yet  a T&M Member?</i>
         </div>
-        <div class="col-md-offset-12 pull-right">
-            <a href="#" id="signin" class="text-secondary"> Sigin </a> 
-            <a href="#" class="text-secondary"> | Join Us</a>
-            <a href="#" class="text-secondary"> | Location</a>
+        <div class="col-md-12 text-right">
+            {{-- <a href=""  id="signin" class="signin text-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Sigin</a> | --}}
+            <a href="#"  id="signin" class="signin text-secondary">Sigin</a> |
+            <a href="#" id="joinus" class="joinus text-secondary">Join Us</a> |
+            <a href="#" class="text-secondary">Location</a>
         </div>
         <div class="col-md-12">
             <span><h2 class="text-center"><i>Themes & Motifs</i></h2></span>
@@ -73,21 +74,73 @@
         </div>
         </div>
     </nav>
-    <div id="app">
-        @yield('content')
+    <div class="modal fade" id="modal-info" tabindex="-1" aria-labelledby="modalInfoLabel" aria-hidden="false">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container-fluid">
+                        <div class="row col-md-12">
+                            <div class="col-md-6">
+                                <h2 class="modal-title fs-6" id="modalInfoLabel">{{ __('Getting Married Soon? ') }}</h2>
+                            </div>
+                            <div class="row col-md-6">
+                                <div class="col-md-11">
+                                    <h2 class="modal-title fs-6" id="modalInfoLabel">{{ __('Are you a Supplier? ') }}</h2>
+                                </div>
+                                <div class="col-md-1">
+                                    <button style="margin-left:50px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row col-md-12">
+                            <div class="col-md-6">
+                                <p align="justify">{{ __("How do you begin forever? Let Themes & Motifs Help you in planning the most romantic day of your life. Rustic or Classic, lavish or austere, grand or intimate, themed or bespoked. you'll find ideas here to make your Big Day memorable, photographable, uniquely yours. ") }}</p>
+                                <a href="{{url('loginBridesGroom')}}" id="brideGroom" type="submit" class="btn btn-primary"></a>
+                            </div>
+                            <div class="col-md-6">
+                                <p align="justify">{{ __("Themes & Motifs has been connecting wedding suppliers like you with engaged couples for 20 more than years. If you are a legitimate wedding supplier, you may register your business and join our community creative professionals serving engaged couples from the Philippines and abroad") }}</p>
+                                <a href="{{route('loginSupplier')}}" id="supplier" type="button" class="btn btn-primary" ></a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <main class="py-4">
+        <div id="app">
+            @yield('content')
+
+        </div>
+    </main>
     
 </body>
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-<script type="text/javascript">
-    $(function(){
-        $("#signin").click(function(){
-            alert("1");
+<script >
+        $("#signin").unbind("click").on("click",function(){
+            $('#modal-info').modal('show');
+            $('#brideGroom').html("Login as Bride & Groom");
+            $('#supplier').html("Login as Supplier");
+            return false
         });
-    });
- 
+
+        $("#joinus").unbind("click").on("click",function(){
+            $('#modal-info').modal('show');
+            $('#brideGroom').html("Register as Bride & Groom");
+            $('#brideGroom').attr("href","{{ url('registerBridesGroom') }}");
+            $('#supplier').html("Register as Supplier");
+            $('#supplier').attr("href","{{ url('registerSupplier') }}");
+            return false
+        });
+        
+    
 </script>
 
 </html>
